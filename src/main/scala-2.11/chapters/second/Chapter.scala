@@ -92,4 +92,19 @@ object Chapter {
   def uncurry[A, B, C](f: A => B => C): (A, B) => C = {
     (a: A, b: B) => f(a)(b)
   }
+
+  /**
+    * Function composition
+    * Ex.5
+    * Function which feeds the output of one function to the input of another function
+    * @param f - first function to compose
+    * @param g - second function to compose
+    * @tparam A - type
+    * @tparam B - type
+    * @tparam C - type
+    * @return composed function
+    */
+  def compose[A,B,C](f: B => C, g: A => B): A => C = {
+    (a: A) => f(g(a))
+  }
 }

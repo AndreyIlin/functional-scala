@@ -2,7 +2,7 @@ package chapters.second
 
 import org.scalatest.{Matchers, WordSpec}
 
-class ChapterSpec extends WordSpec with Matchers {
+class Chapter$Spec extends WordSpec with Matchers {
 
   "Chapter" should {
 

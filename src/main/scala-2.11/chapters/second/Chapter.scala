@@ -6,8 +6,8 @@ object Chapter {
 
   /**
     * Tail recursion
-    * Ex.1 Write a recursive function to get the nth Fibonacci number
-    * Implementation should use local tail-recursive function
+    * Ex.1
+    * Gets the nth Fibonacci number, uses local tail-recursive function
     *
     * @param n - Fibonacci number to count
     * @return value of Fibonacci number
@@ -34,8 +34,13 @@ object Chapter {
 
   /**
     * Polymorphic functions
-    * Ex.2 Implement isSorted,
-    * which checks whether an Array[A] is sorted according to a given comparison function
+    * Ex.2
+    * Checks whether an Array[A] is sorted according to a given comparison function
+    *
+    * @param as      - array to check if it's sorted
+    * @param ordered - compare function
+    * @tparam A - type
+    * @return true if array is sorted, otherwise false
     */
   def isSorted[A](as: Array[A], ordered: (A, A) => Boolean): Boolean = {
 
@@ -57,5 +62,34 @@ object Chapter {
     } else {
       loop(0)
     }
+  }
+
+  /**
+    * Currying
+    * Ex.3 Converts a function f of two arguments into a function of one argument that partially applies f
+    *
+    * @param f - function to curry
+    * @tparam A - type
+    * @tparam B - type
+    * @tparam C - type
+    * @return curried function
+    */
+  def curry[A, B, C](f: (A, B) => C): A => (B => C) = {
+    (a: A) => (b: B) => f(a, b)
+  }
+
+  /**
+    * Uncurrying
+    * Ex.4
+    * Converts a function f of one argument that partially applies returned function to function of two arguments
+    *
+    * @param f - function to uncurry
+    * @tparam A - type
+    * @tparam B - type
+    * @tparam C - type
+    * @return uncurried function
+    */
+  def uncurry[A, B, C](f: A => B => C): (A, B) => C = {
+    (a: A, b: B) => f(a)(b)
   }
 }

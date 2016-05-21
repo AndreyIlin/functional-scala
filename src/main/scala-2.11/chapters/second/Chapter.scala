@@ -97,8 +97,8 @@ object Chapter {
     * Function composition
     * Ex.5
     * Function which feeds the output of one function to the input of another function
-    * @param f - first function to compose
-    * @param g - second function to compose
+    * @param f - function that composes another one
+    * @param g - composed function
     * @tparam A - type
     * @tparam B - type
     * @tparam C - type

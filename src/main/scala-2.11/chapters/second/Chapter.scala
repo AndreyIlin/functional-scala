@@ -46,15 +46,9 @@ object Chapter {
 
     @tailrec
     def loop(i: Int): Boolean = {
-      if (i + 1 < as.length) {
-        if (ordered(as(i), as(i + 1))) {
-          loop(i + 1)
-        } else {
-          false
-        }
-      } else {
-        true
-      }
+      if (i + 1 == as.length) true
+      else if (!ordered(as(i), as(i + 1))) false
+      else loop(i + 1)
     }
 
     if (as.length < 2) {
@@ -75,7 +69,7 @@ object Chapter {
     * @return curried function
     */
   def curry[A, B, C](f: (A, B) => C): A => (B => C) = {
-    (a: A) => (b: B) => f(a, b)
+    a => b => f(a, b)
   }
 
   /**
@@ -90,7 +84,7 @@ object Chapter {
     * @return uncurried function
     */
   def uncurry[A, B, C](f: A => B => C): (A, B) => C = {
-    (a: A, b: B) => f(a)(b)
+    (a, b) => f(a)(b)
   }
 
   /**
@@ -105,6 +99,6 @@ object Chapter {
     * @return composed function
     */
   def compose[A,B,C](f: B => C, g: A => B): A => C = {
-    (a: A) => f(g(a))
+    a => f(g(a))
   }
 }

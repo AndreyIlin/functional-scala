@@ -11,8 +11,8 @@ class ChapterSpec extends WordSpec with Matchers {
     }
 
     "return true if array is sorted" in {
-      Chapter.isSorted(Array(10, 11, 12, 13), (a: Int, b: Int) => a < b) should be (true)
-      Chapter.isSorted(Array("abcd", "bcda", "dabc", "cdab"), (a: String, b: String) => a < b) should be (false)
+      Chapter.isSorted[Int](Array(10, 11, 12, 13), (a, b) => a < b) should be (true)
+      Chapter.isSorted[String](Array("abcd", "bcda", "dabc", "cdab"), (a, b) => a < b) should be (false)
     }
 
   }

@@ -7,12 +7,11 @@ class Main
 
 object Main {
   /**
-    * Tail recursion
     * Ex.1
-    * Gets the nth Fibonacci number, uses local tail-recursive function
+    * Gets the n-th Fibonacci number, uses local tail-recursive function
     *
     * @param n - Fibonacci number to count
-    * @return value of Fibonacci number
+    * @return value of `n`-th Fibonacci number
     */
   def fib(n: Int): Int = {
 
@@ -35,9 +34,8 @@ object Main {
   }
 
   /**
-    * Polymorphic functions
     * Ex.2
-    * Checks whether an Array[A] is sorted according to a given comparison function
+    * Checks whether this array is sorted according to a given comparison function
     *
     * @param as      - array to check if it's sorted
     * @param ordered - compare function
@@ -61,13 +59,10 @@ object Main {
   }
 
   /**
-    * Currying
-    * Ex.3 Converts a function f of two arguments into a function of one argument that partially applies f
+    * Ex.3
+    * Converts a function f of two arguments into a function of one argument that partially applies f
     *
     * @param f - function to curry
-    * @tparam A - type
-    * @tparam B - type
-    * @tparam C - type
     * @return curried function
     */
   def curry[A, B, C](f: (A, B) => C): A => (B => C) = {
@@ -75,14 +70,10 @@ object Main {
   }
 
   /**
-    * Uncurrying
     * Ex.4
     * Converts a function f of one argument that partially applies returned function to function of two arguments
     *
     * @param f - function to uncurry
-    * @tparam A - type
-    * @tparam B - type
-    * @tparam C - type
     * @return uncurried function
     */
   def uncurry[A, B, C](f: A => B => C): (A, B) => C = {
@@ -90,15 +81,11 @@ object Main {
   }
 
   /**
-    * Function composition
     * Ex.5
-    * Function which feeds the output of one function to the input of another function
+    * Feeds the output of one function to the input of another function
     *
-    * @param f - function that composes another one
-    * @param g - composed function
-    * @tparam A - type
-    * @tparam B - type
-    * @tparam C - type
+    * @param f - function that consumes output of `g`
+    * @param g - function that produces input for `f`
     * @return composed function
     */
   def compose[A, B, C](f: B => C, g: A => B): A => C = {

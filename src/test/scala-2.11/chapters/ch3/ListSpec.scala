@@ -44,5 +44,13 @@ class ListSpec extends WordSpec with Matchers {
     "return reversed list" in {
       List.reverse(List(1, 2, 3)) should equal(List(3, 2, 1))
     }
+
+    "return result of appending one list to another" in {
+      List.appendFoldLeft(List(1, 2, 3), List(4, 5, 6)) should equal(List(1, 2, 3, 4, 5, 6))
+    }
+
+    "return concatenate list of lists into a single list" in {
+      List.concat(List(List(1, 2, 3), List(4, 5, 6), List(7, 8, 9))) should equal(List(1, 2, 3, 4, 5, 6, 7, 8, 9))
+    }
   }
 }

@@ -139,7 +139,9 @@ object List {
   }
 
   /**
+    * Ex.12
     * Reverses `as`
+    *
     * @param as given list
     * @return reversed `as`
     */
@@ -151,6 +153,7 @@ object List {
   }
 
   /**
+    * Ex.13
     * Implements foldRight through foldLeft
     * This way fold right is tail recursive
     * Applies given function `f` to all elements of `as`,
@@ -165,6 +168,35 @@ object List {
     */
   def foldRightWithFoldLeft[A, B](as: List[A], z: B)(f: (A, B) => B): B = {
     foldLeft(reverse(as), z)((b, a) => f(a, b))
+  }
+
+  /**
+    * Ex.14
+    * Appends one list to another
+    * Implemented with foldLeft
+    *
+    * @param a1 first list
+    * @param a2 list to append to `a1`
+    * @return result of appending `a1` to `a2`
+    */
+  def appendFoldLeft[A](a1: List[A], a2: List[A]): List[A] = {
+    foldLeft(List.reverse(a1), a2)((t, h) => h match {
+      case Nil => t
+      case _ => Cons(h, t)
+    })
+  }
+
+  /**
+    * Ex.15
+    * Concatenates list of lists into one single list
+    *
+    * @param a list of lists
+    * @return result of concatenation
+    */
+  def concat[A](a: List[List[A]]): List[A] = a match {
+    case Nil => Nil
+    case Cons(h, Nil) => h
+    case Cons(h, t) => List.appendFoldLeft(h, concat(t))
   }
 
 

@@ -52,5 +52,35 @@ class ListSpec extends WordSpec with Matchers {
     "return concatenate list of lists into a single list" in {
       List.concat(List(List(1, 2, 3), List(4, 5, 6), List(7, 8, 9))) should equal(List(1, 2, 3, 4, 5, 6, 7, 8, 9))
     }
+
+    "return list of integers of source list incremented by 1" in {
+      val is = List(1, 2, 3, 4)
+      List.increment(is) should equal(List(2, 3, 4, 5))
+      is should equal(List(1, 2, 3, 4))
+    }
+
+    "return list of doubles as strings" in {
+      List.toString(List(1.0, 2.0, 3.0)) should equal(List("1.0", "2.0", "3.0"))
+    }
+
+    "apply given function to elements of the list" in {
+      List.map(List(1, 2, 3, 4))(_ + 3) should equal(List(4, 5, 6, 7))
+    }
+
+    "return filtered list" in {
+      List.filter(List(1, 2, 3, 4, 5, 6, 7))(_ % 2 == 0) should equal(List(2, 4, 6))
+    }
+
+    "apply given function to elements of the list and use result of application" in {
+      List.flatMap(List(1, 2, 3, 4))(i => List(i, i + 1)) should equal(List(1, 2, 2, 3, 3, 4, 4, 5))
+    }
+
+    "return filtered list using flatMap" in {
+      List.filterFlatMap(List(1, 2, 3, 4))(_ % 2 == 0) should equal(List(2, 4))
+    }
+
+    "sum elements of two list of integer numbers" in {
+      List.listsSum(List(1, 2, 3, 4), List(4, 5, 6)) should equal(List(5, 7, 9, 4))
+    }
   }
 }

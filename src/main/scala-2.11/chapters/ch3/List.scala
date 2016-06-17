@@ -199,6 +199,127 @@ object List {
     case Cons(h, t) => List.appendFoldLeft(h, concat(t))
   }
 
+  /**
+    * Ex.16
+    * Builds a new list adding 1 to each element of `is`
+    *
+    * @param is given list of `Int`
+    * @return new list resulting from adding 1 to each element of `as`
+    */
+  def increment(is: List[Int]): List[Int] = {
+    foldLeft(reverse(is), Nil: List[Int])((t, h) => {
+      Cons(h + 1, t)
+    })
+  }
+
+  /**
+    * Ex.17
+    * Builds a new list converting each double of `ds` to string
+    *
+    * @param ds given list of `Double`
+    * @return new list resulting from calling `toString` on each element of `ds`
+    */
+  def toString(ds: List[Double]): List[String] = {
+    foldLeft(reverse(ds), Nil: List[String])((t, h) => {
+      Cons(h.toString, t)
+    })
+  }
+
+  /**
+    * Ex.18
+    * Builds a new list applying function `f` to each element of `as`
+    *
+    * @param as given list
+    * @param f  function to apply
+    * @return new list resulting from applying `f` to each element of `as`
+    */
+  def map[A, B](as: List[A])(f: A => B): List[B] = {
+    foldRightWithFoldLeft(as, Nil: List[B])((h, t) => {
+      Cons(f(h), t)
+    })
+  }
+
+  /**
+    * Ex.19
+    * Builds new list from elements of `as` that satisfy given predicate `p`
+    *
+    * @param as given list
+    * @param p  predicate
+    * @return new list of elements for which `p` returned `true`
+    */
+  def filter[A](as: List[A])(p: A => Boolean): List[A] = {
+    foldRightWithFoldLeft(as, Nil: List[A])((h, t) => {
+      if (p(h)) {
+        Cons(h, t)
+      } else {
+        t
+      }
+    })
+  }
+
+  /**
+    * Ex.20
+    * Builds new list by applying function to each element of the list and uses result
+    *
+    * @param as given list
+    * @param f  function to apply
+    * @return new list resulting from applying f to each element to as
+    */
+  def flatMap[A, B](as: List[A])(f: A => List[B]): List[B] = {
+    foldRightWithFoldLeft(as, Nil: List[B])((h, t) => {
+      List.appendFoldLeft(f(h), t)
+    })
+  }
+
+  /**
+    * Ex.21
+    * Builds new list from elements of `as` that satisfy given predicate `p`
+    *
+    * @param as given list
+    * @param p  predicate
+    * @return new list of filtered elements
+    */
+  def filterFlatMap[A](as: List[A])(p: A => Boolean): List[A] = flatMap(as)(h => if (p(h)) List(h) else Nil)
+
+  /**
+    * Ex.22
+    * Sums elemets of two integer lists
+    *
+    * @param xs first list of `Int`
+    * @param ys second list of `Int`
+    * @return list of elements that are sum of pairs of elements from `xs` and `ys`
+    */
+  def listsSum(xs: List[Int], ys: List[Int]): List[Int] = {
+    xs match {
+      case Nil => ys
+      case Cons(xh, xt) => ys match {
+        case Nil => xs
+        case Cons(yh, yt) =>
+          Cons(xh + yh, listsSum(xt, yt))
+      }
+    }
+  }
+
+  /**
+    * Ex.23
+    * Constructs new list from `xs` and `ys` applying `f` to each pair of elements of `xs` and `ys`
+    *
+    * @param xs first list of type `A`
+    * @param ys second list of type `A`
+    * @param f  function to apply to pairs of elements of `xs`, `ys`
+    * @tparam A type of list
+    * @return new list which elements are result of applying `f` to each element of `xs` and `ys`
+    */
+  def zipWith[A](xs: List[A], ys: List[A])(f: (A, A) => A): List[A] = {
+    xs match {
+      case Nil => ys
+      case Cons(xh, xt) => ys match {
+        case Nil => xs
+        case Cons(yh, yt) =>
+          Cons(f(xh, yh), zipWith(xt, yt)(f))
+      }
+    }
+  }
 
   def append[A](a1: List[A], a2: List[A]): List[A] =
     a1 match {

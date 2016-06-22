@@ -321,6 +321,43 @@ object List {
     }
   }
 
+  /**
+    * Ex.24
+    * Determines if list has given subsequence
+    *
+    * @param sup list to search `sub` in
+    * @param sub subsequence to search
+    * @tparam A type of list elements
+    * @return true if `sup` contains `sub`
+    */
+  def hasSubsequence[A](sup: List[A], sub: List[A]): Boolean = {
+    def loop (sup: List[A], sub: List[A], initialSub: List[A]): Boolean = {
+      sub match {
+        case Nil => true
+        case Cons(sh, Nil) =>
+          sup match {
+            case Nil => false
+            case Cons(h, Nil) => sh == h
+            case Cons(h, t) =>
+              if (sh == h) true
+              else loop(t, sub, initialSub)
+          }
+        case Cons(sh, st) =>
+          sup match {
+            case Nil => false
+            case Cons(h, Nil) => false
+            case Cons(h, t) => {
+              if (sh == h)
+                loop(t, st, initialSub)
+              else
+                loop(t, initialSub, initialSub)
+            }
+          }
+      }
+    }
+    loop(sup, sub, sub)
+  }
+
   def append[A](a1: List[A], a2: List[A]): List[A] =
     a1 match {
       case Nil => a2

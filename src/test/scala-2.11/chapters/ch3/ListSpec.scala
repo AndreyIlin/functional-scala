@@ -82,5 +82,14 @@ class ListSpec extends WordSpec with Matchers {
     "sum elements of two list of integer numbers" in {
       List.listsSum(List(1, 2, 3, 4), List(4, 5, 6)) should equal(List(5, 7, 9, 4))
     }
+
+    "return false if list dosn't have given subsequence" in {
+      List.hasSubsequence(List(1, 2, 3, 4, 5), List(3, 4)) should be(true)
+      List.hasSubsequence(List(1, 2, 3, 4, 5), List(1, 2, 3)) should be(true)
+      List.hasSubsequence(List(1, 2, 3, 4, 5), List(3)) should be(true)
+      List.hasSubsequence(List(1, 2, 3, 4, 5), List(4)) should be(true)
+      List.hasSubsequence(List(1, 2, 3, 4, 5), List(2, 3)) should be(true)
+      List.hasSubsequence(List(1, 2, 3, 4, 5), List(1)) should be(true)
+    }
   }
 }

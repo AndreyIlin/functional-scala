@@ -31,6 +31,21 @@ class TreeSpec extends WordSpec with Matchers {
       Tree.map(tree)((_) => 1) shouldEqual Branch(Branch(Leaf(1), Leaf(1)), Branch(Leaf(1), Branch(Leaf(1), Leaf(1))))
     }
 
+    "return size of a tree using implementation via fold" in {
+      val tree = Branch(Branch(Leaf(1), Leaf(2)), Branch(Leaf(3), Branch(Leaf(4), Leaf(5))))
+      Tree.sizeViaFold(tree) shouldEqual 9
+    }
+
+    "return maximum integer value of a tree using implementation via fold" in {
+      val tree = Branch(Branch(Leaf(1), Leaf(20)), Branch(Leaf(351), Branch(Leaf(14), Leaf(51))))
+      Tree.maximumViaFold(tree) shouldEqual 351
+    }
+
+    "return depth of a tree using implementation via fold" in {
+      val tree = Branch(Leaf(1), Branch(Leaf(1), Branch(Leaf(1), Branch(Leaf(2), Leaf(3)))))
+      Tree.depthViaFold(tree) shouldEqual 4
+    }
+
   }
 
 }
